@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "appserviceb.fullname" . }}
+spec:
+  selector:
+    matchLabels:
+      app: serviceb
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: serviceb
+    spec:
+      serviceAccountName: {{ include "appserviceb.serviceAccountName" . }}
+      containers:
+      - name: serviceb
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        envFrom:
+          -  configMapRef:
+               name: getrequest-cm
+        ports:
+        - containerPort: 8082
+#Uncomment below if kuberenetes version 1.21
+#        startupProbe:
+#          httpGet:
+#            path: /health
+#            port: 8082
+#          failureThreshold: 6
+#          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8082
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8082
+          initialDelaySeconds: 1
+          periodSeconds: 3

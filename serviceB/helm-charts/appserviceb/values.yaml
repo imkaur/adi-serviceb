@@ -1,0 +1,32 @@
+# Default values for appservicea.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: mandeep1690/serviceb
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "0.0.2"
+
+imagePullSecrets: []
+nameOverride: "serviceb-app"
+fullnameOverride: "serviceb-app"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "sa-serviceb"
+
+service:
+  type: LoadBalancer
+  port: 8082
+
+configmap:
+  data:
+    get_request: "http://servicea-app.default.svc.cluster.local:8081/api/serviceA"
