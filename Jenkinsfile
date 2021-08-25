@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE_NAME = "mandeep1690/servicea"
+        DOCKER_IMAGE_NAME = "mandeep1690/serviceb"
  	dockerfile= "Dockerfile"   
 }
     stages {
@@ -16,7 +16,7 @@ pipeline {
             }
             steps {
                 script {
-		    app = docker.build(DOCKER_IMAGE_NAME, "-f serviceA/${dockerfile} .")
+		    app = docker.build(DOCKER_IMAGE_NAME, "-f serviceB/${dockerfile} .")
                     app.inside {
                         sh 'echo Hello, World!'
                     }
