@@ -45,15 +45,10 @@ pipeline {
                 milestone(1)
 		script {
 		   sh """
-			/usr/local/bin/helm upgrade --install servicea-app serviceB/helm-charts/appserviceb/ --values serviceB/helm-charts/appserviceb/values.yaml --set image.tag="${env.BUILD_NUMBER}" --kubeconfig  /home/cloud_user/.kube/config
+			/usr/local/bin/helm upgrade --install serviceb-app serviceB/helm-charts/appserviceb/ --values serviceB/helm-charts/appserviceb/values.yaml --set image.tag="${env.BUILD_NUMBER}" --kubeconfig  /home/cloud_user/.kube/config
 		"""
 		}
-                //implement Kubernetes deployment here
-//        	kubernetesDeploy(kubeconfigId: 'kubeconfig',
-//                        configs: 'serviceA/kube-manifests/deployment.yaml',
-//                        enableConfigSubstitution: true
-//			)
-		}
+	    }
         }
     }
 }
