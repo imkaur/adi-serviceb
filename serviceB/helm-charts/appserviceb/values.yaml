@@ -24,7 +24,7 @@ serviceAccount:
   name: "sa-serviceb"
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 8082
 
 configmap:
