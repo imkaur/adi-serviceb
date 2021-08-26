@@ -1,5 +1,5 @@
 ## adi-serviceb
-This service calls service A and prints out whenever 500 prints out.
+This service B calls service A and prints out to stdout whenever 500 is returned.
 ## Prerquisites
 * Kubernetes - Tested on version 1.10 and latest(1.21)
 * Helm3
