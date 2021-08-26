@@ -30,7 +30,7 @@ This service B calls service A (src- https://github.com/imkaur/adi-servicea) and
 To create a scheduled job for calling service B, perform below step in kubernetes cluster:
 * kubectl apply -f cronjob.yaml
 ## Monitoring
-* Service is monitored from kuberenets perspective by setting monitoring probes such as - startupProbe, livenessProbe and readinessProbe.
+* Service is monitored from kubernetes perspective by setting monitoring probes such as - startupProbe, livenessProbe and readinessProbe.
 * Out of the many ways, one of the standard way of monitoring applications is by using a combination of prometheus, grafana and alert-manager. While prometheus scrapes the target by pulling the metrics, grafana displays dashboards and alertmanager is being used to generate alerts to send to email, on-call notification systems, and chat platforms.
 * Here, to get insights about the applictaion, it can be monitored by exposing the metrics to prometheus and alert can be set when error ratio is greater than threshold limit. 
 * The application error percentage is the number of requests that result in an error compared to the total number of requests.
