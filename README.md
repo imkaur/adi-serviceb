@@ -35,5 +35,7 @@ To create a scheduled job for calling service B, perform below step in kubernete
 * Here, to get insights about the applictaion, it can be monitored by exposing the metrics to prometheus and alert can be set when error ratio is greater than threshold limit. 
 * The application error percentage is the number of requests that result in an error compared to the total number of requests.
 * Initialize prometheus metrics by prometheus client library. It is possible to import prometheus metrics from prometheus_flask_exporter and get request counters exposed to /metrics endpoint.
-* flask_http_request_total - gives Total number of HTTP requests by method and status
-* Add a rule to alertmanager with value such as => rate(flask_http_request_total{status="500"}[1m]) > 60
+* Assuming http_request_total - gives Total number of HTTP requests processed and http_status_500_total which gives the total unexpected errors in our application.
+* A rule like below can give the error ratio
+  * `rate(http_status_500_total [1m]) / rate(http_request_total [1m])`
+* If this comes out to be > threshold_value, we can trigger an alert to the preferred group and channel via alert manager.
