@@ -14,6 +14,11 @@ This service B calls service A and prints out to stdout whenever 500 is returned
 * Jenkins acts as orchestrator to deploy the application in kubernetes.
 * There is no requirement for this service to be exposed to external network, hence, clusterIP service has been used as default.
 * If you wish to expose it to external network, you can change the type in values.yaml to NodePort or LoadBalancer (Eg. Type: NodePort)
+## Docker Image
+* If I used a python3.7 image, the iamge size turns out to be 918MB which is huge.
+* To reduce the size and minimize the attack surface below steps are taken:
+  * Multi-stage docker build 
+  * Considered python:3.7-alpine image as base
 ## CronJob
 To create a scheduled job for calling service B, perform below step in kubernetes cluster:
 * kubectl apply -f cronjob.yaml
