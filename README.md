@@ -18,6 +18,7 @@ This service B calls service A (src- https://github.com/imkaur/adi-servicea) and
 * To reduce the size and minimize the attack surface below steps are taken:
   * Multi-stage docker build
   * Considered python:3.7-alpine image as base
+  * Current size of service A image is 89.7MB
 ## Install and Deploy
 * Helm Charts of service is created at https://github.com/imkaur/adi-serviceb/tree/main/serviceB/helm-charts/appserviceb
 * Jenkins acts as orchestrator to deploy the application in kubernetes.
